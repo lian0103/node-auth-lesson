@@ -1,6 +1,31 @@
 <%- include('partials/header'); -%>
 
-<h1>log in</h1>
+<form action="">
+<h2>log in</h2>
+<label for="email">email</label>
+<input type="text" name="email" required>
+<div class="email error"></div>
 
+<label for="psw">password</label>
+<input type="password" name="psw" required>
+<div class="psw error"></div>
+
+<button>log in</button>
+</form>
+
+<script>
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        //取值
+        let email = form.email.value;
+        let psw = form.psw.value;
+
+        console.log(email, psw);
+    });
+
+</script>
 
 <%- include('partials/footer'); -%>
