@@ -36,6 +36,20 @@ UserSchema.pre('save',async function(next){
 });
 
 
+UserSchema.statics.login  = async function ( email , password ) {
+        const user = await this.findOne({ email });
+        if(user){
+            console.log(user);
+            const auth = await bycrypt.compare(password,user.password); //比對存在mangoDB 被hash的密碼
+            if(auth){
+                return user;
+            }
+            throw Error('incorrect password')
+        }
+        throw Error('incorrect email')
+  }
+
+
 const User = mongoose.model('user',UserSchema)
 
 module.exports = User;
