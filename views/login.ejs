@@ -41,9 +41,9 @@
                 pswError.textContent = data.errors.password;
             }
 
-            // if (!data.errors) {
-            //     location.assign('/');
-            // }
+            if (!data.errors) {
+                location.assign('/');
+            }
 
         } catch(err){
             console.log(err);
