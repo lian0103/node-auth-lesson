@@ -39,6 +39,8 @@ nav li a{
   display: block;
   padding: 10px 16px;
   letter-spacing: 2px;
+  border-radius: 36px;
+  background: #FEE996;
 }
 .btn{
   border-radius: 36px;
@@ -136,4 +138,12 @@ footer{
   text-align: center;
   margin-top: 120px;
   color: #aaa;
+}
+
+.hideDiv{
+  display: none;
+}
+
+.showDiv{
+  display: block;
 }

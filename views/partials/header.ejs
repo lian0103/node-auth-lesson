@@ -1,16 +1,61 @@
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>auth-lesson</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
+
 <body>
   <nav>
     <h1><a href="/">Ninja Smoothies</a></h1>
     <ul>
-      <li><a href="/login">Log In</a></li>
-      <li><a href="/signup">sigb up</a></li>
+      <li><span class="userName"></span></li>
+      <li><a id="btn_login" href="/login">登入</a></li>
+      <li><a id="btn_logout" href="/logout">登出</a></li>
+      <li><a href="/signup">註冊</a></li>
     </ul>
   </nav>
-  
+
+  <script>
+
+    const getCookies = () => {
+      let cookieObj = {};
+      let cookiesArr = document.cookie.split(';');
+
+      cookiesArr.forEach(item => {
+        let strs = item.split('=');
+        cookieObj[strs[0].trim()] = strs[1]
+      })
+
+      return cookieObj;
+    }
+
+    const init = () => {
+      let cookies = getCookies();
+
+      let btn_login = document.querySelector('#btn_login');
+      let btn_logout = document.querySelector('#btn_logout');
+      let userNameDiv = document.querySelector('.userName');
+
+      if (cookies.jwt && cookies.jwt != '') {
+        console.log('in')
+        btn_login.classList.add('hideDiv');
+        btn_login.classList.remove('showDiv');
+        btn_logout.classList.add('showDiv');
+        btn_logout.classList.remove('hideDiv');
+        userNameDiv.textContent = `hi , ${cookies.userEmail.replace('%40',"@")}`;
+      }else{
+        btn_login.classList.add('showDiv');
+        btn_login.classList.remove('hideDiv');
+        btn_logout.classList.add('hideDiv');
+        btn_logout.classList.remove('showDiv');
+        userNameDiv.textContent = '';
+      }
+
+    }
+
+    window.onload = init;
+
+  </script>
