@@ -1,9 +1,9 @@
-# node-auth-lesson
+node express app實作練習 - 權限註冊與管理
 
-20200826
+##教學影片來源 net ninja : https://www.youtube.com/watch?v=SnoAwLP1a-0&list=PL4cUxeGkcC9iqqESP8335DA5cRFp8loyp
 
-node環境下,使用jasonwebtoken製作cookie給client端使用
-包含註冊、登入的功能,資料存取於mangoDB
+##使用技術
+nodejs , express , view engine: ejs , DB: mangoDB , jasonwebtoken
 
-ninja同時示範在express app中,加入對route的中間層做token的驗證
-來實現client端有登入才有瀏覽的權限
+##功能
+註冊、登入、route下的token驗證(實現client端有登入才有瀏覽的權限)
