@@ -1,43 +1,37 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const authRoutes = require('./routes/auth');
-const cookieParser = require('cookie-parser');
-const { requireAuth } = require('./middleware/authMiddleware');
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const authRoutes = require("./routes/auth");
+const cookieParser = require("cookie-parser");
+const { requireAuth } = require("./middleware/authMiddleware");
 
 const app = express();
 
 // middleware
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.use(express.json());
 app.use(cookieParser());
 
 // view engine
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
-// database connection
-const dbURI = 'mongodb+srv://lien0103:k1319900103@cluster0.f2mhj.mongodb.net/node-auth';
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
-  .then((result) => app.listen(3001))
+console.log(typeof parseInt(process.env.SERVER_PORT));
+console.log(process.env.MANGODB_URL);
+
+// DB config from .env
+const dbURI =
+  "mongodb+srv://lien0103:k1319900103@cluster0.f2mhj.mongodb.net/node-auth";
+const port = parseInt(process.env.SERVER_PORT) || 3001;
+mongoose
+  .connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then((result) => app.listen(port))
   .catch((err) => console.log(err));
 
 // routes
-app.get('/', (req, res) => res.render('home'));
-app.get('/smoothies', requireAuth , (req, res) => res.render('smoothies'));
+app.get("/", (req, res) => res.render("home"));
+app.get("/smoothies", requireAuth, (req, res) => res.render("smoothies"));
 app.use(authRoutes);
-
-// //cookie test
-// app.get('/set-cookie',(req,res) =>{
-//   // res.setHeader('Set-Cookie','newUser=true');
-//   res.cookie('newUser',false);
-//   res.cookie('isLien',true,{maxAge:1000 * 60 ,httpOnly:true})
-//   res.send('browser got the cookies');
-// })
-
-// app.get('/read-cookie',(req,res)=>{
-//   let cookiesFromBrowser = req.cookies;
-//   console.log(cookiesFromBrowser);
-
-//   res.json(cookiesFromBrowser);
-
-// });
-
