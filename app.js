@@ -21,7 +21,7 @@ console.log(process.env.MANGODB_URL);
 // DB config from .env
 const dbURI =
   "mongodb+srv://lien0103:k1319900103@cluster0.f2mhj.mongodb.net/node-auth";
-const port = parseInt(process.env.SERVER_PORT) || 3001;
+const port = 3001;
 mongoose
   .connect(dbURI, {
     useNewUrlParser: true,
